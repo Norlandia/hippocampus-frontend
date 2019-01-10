@@ -1,0 +1,99 @@
+.paper {
+  color: white;
+  background-color: #B09765;
+  box-shadow: -15px 30px #897245;
+  border-radius: 13px;
+  width: 300px;
+  height: 400px;
+  padding: 2%;
+  text-align: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  position: absolute;
+  right: 15%;
+  top: 25%;
+  font-family: 'Orbitron', sans-serif;
+}
+
+input {
+  margin-bottom: 15%;
+  height: 25px;
+}
+
+.paperInputContainer {
+    margin: 5%;
+    display: inline-grid;
+    padding: 5%;
+}
+
+label {
+  color: white;
+  text-align: left;
+}
+
+.bottomLink {
+  text-decoration: none;
+  color: white;
+  transition: all .2s ease-in-out;
+  list-style-type: none;
+  width: fit-content;
+}
+
+
+.bottomLink:hover {
+  transform: scale(1.1);  
+  cursor: pointer;
+}
+
+.loginButton {
+  height: 30px;
+  width: 70px;
+  border: none;
+  border-radius: 10px;
+  margin-left: 83%;
+  background: #897245;  
+  color: white;
+  white-space: nowrap;
+  font-family: 'Orbitron', sans-serif;
+  padding-top: 2%;
+  text-align: center;
+}
+
+.loginButton:hover {
+  background: #573C23;
+  cursor: pointer;  
+}
+
+.signUpLink {
+  margin-bottom: 3%;
+  bottom: 0;
+  position: absolute;
+}
+
+
+.header {
+  text-align: center;
+  font-family: 'ZCOOL KuaiLe', cursive;
+  font-size: -webkit-xxx-large;
+  text-transform: uppercase;
+  color: #B09765;
+}
+
+.footer {
+  text-decoration: none;
+  color: #B09765;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 2%;
+  text-align: center;
+  width: 100%;
+  padding-top: 0.15%;
+  padding-bottom: 0.15%;
+  transition: all .2s ease-in-out;
+}
+
+.footer:hover {
+  color: white;
+  transform: scale(1.1);
+}

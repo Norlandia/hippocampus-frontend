@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Card from '../components/Card';
-import '../game.css';
+import './game.css';
 
 class Board extends Component {
   state = {
@@ -115,7 +115,7 @@ class Board extends Component {
 
   render() {
     return (
-      <div>
+      <div className="game">
         {this.state.board.map((row, i) => (
           <div key={i}>
             {row.map((card, j) => (
