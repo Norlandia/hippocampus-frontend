@@ -3,24 +3,26 @@ import Card from '../components/Card';
 
 class Board extends Component {
   state = {
-    board: [
-      [
-        {
-          value: 0,
-        },
-        {
-          value: 1,
-        },
-      ],
-      [
-        {
-          value: 2,
-        },
-        {
-          value: 3,
-        },
-      ],
-    ],
+    board: [],
+  };
+
+  componentDidMount() {
+    console.log('Working');
+    this.createBoard();
+  }
+
+  createBoard = () => {
+    const board = [];
+    for (let i = 0; i < 3; i++) {
+      let row = [];
+      for (let j = 0; j < 3; j++) {
+        row.push({ value: j });
+      }
+      board.push(row);
+    }
+    this.setState({
+      board: board,
+    });
   };
 
   render() {
@@ -29,7 +31,7 @@ class Board extends Component {
         {this.state.board.map((row, i) => (
           <div key={i}>
             {row.map((card, j) => (
-              <Card key={card.value} value={card.value}/>
+              <Card key={card.value} value={card.value} />
             ))}
           </div>
         ))}
