@@ -1,9 +1,10 @@
 import React from 'react';
+import Board from '../containers/Board';
 
 const App = () => {
   return (
     <div>
-      <h1>rottenEggs</h1>
+      <Board />
     </div>
   );
 };
