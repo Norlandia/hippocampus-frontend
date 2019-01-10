@@ -31,13 +31,17 @@ class Board extends Component {
     return indexValue === 8;
   }
 
+  handleClick = () => {
+    
+  }
+
   render() {
     return (
       <div>
         {this.state.board.map((row, i) => (
           <div key={i}>
             {row.map((card, j) => (
-              <Card key={card.value} value={card.value} empty={this.isLast(i*3+j)}/>
+              <Card key={card.value} value={card.value} onClick={this.handleClick} empty={this.isLast(i*3+j)}/>
             ))}
           </div>
         ))}
