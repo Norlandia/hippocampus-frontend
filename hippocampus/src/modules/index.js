@@ -12,7 +12,7 @@ return (
     <div>
       <h1 className="header"> Hippocampus</h1>
       <PaperImage/>
-      <Route exact path="/" component={PaperLogin}/>
+      <Route exact path="/login" component={PaperLogin}/>
       <Route path="/signup" component={PaperSignUp}/>
       <a className="footer" href="/">Designed and created by | Kriszta Nemeth | Nora Puskas | Peter Antal</a>
     </div>
