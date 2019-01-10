@@ -19,7 +19,7 @@ const Paper2 = () => (
       <button className="loginButton">Sign Up</button>  
     </div>
     <div className="signUpLink">
-      <li className="bottomLink"><NavLink className="bottomLink" to="/login">Already have an account?</NavLink></li>    
+      <li className="bottomLink"><NavLink className="bottomLink" to="/">Already have an account?</NavLink></li>    
     </div>
   </div>
   <a className="footer" href="/">Designed and created by | Kriszta Nemeth | Nora Puskas | Peter Antal</a>

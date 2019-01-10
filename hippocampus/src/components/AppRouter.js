@@ -11,7 +11,7 @@ const AppRouter = () => {
   return (
     <Router>
       <div>
-        <Route exact path={["/", "/login"]} component={PaperLogin}/>
+        <Route exact path="/" component={PaperLogin}/>
         <Route path="/signup" component={PaperSignUp}/>
         <Route path="/game" component={Game} />
       </div>
