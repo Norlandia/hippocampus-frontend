@@ -4,7 +4,6 @@ import Board from '../containers/Board';
 const App = () => {
   return (
     <div>
-      <Board />
     </div>
   );
 };
