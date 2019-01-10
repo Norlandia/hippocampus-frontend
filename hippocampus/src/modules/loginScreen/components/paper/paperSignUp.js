@@ -1,8 +1,12 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
+import PaperImage from './paperImage';
 import './paper.css';
 
 const Paper2 = () => (
+  <div>
+      <h1 className="header"> Hippocampus</h1>
+      <PaperImage/>     
   <div className="paper">
     <h1>Sign Up</h1>
     <div className="paperInputContainer">
@@ -15,8 +19,11 @@ const Paper2 = () => (
       <button className="loginButton">Sign Up</button>  
     </div>
     <div className="signUpLink">
-      <li className="bottomLink"><NavLink className="bottomLink" to="/">Already have an account?</NavLink></li>    
+      <li className="bottomLink"><NavLink className="bottomLink" to="/login">Already have an account?</NavLink></li>    
     </div>
+  </div>
+  <a className="footer" href="/">Designed and created by | Kriszta Nemeth | Nora Puskas | Peter Antal</a>
+  
   </div>
 );
 

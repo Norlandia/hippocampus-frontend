@@ -1,5 +1,4 @@
-import React from 'react';
-import React, { Component } from 'react';
+import React, { Component } from 'react'; // eslint-disable-line
 import Board from '../containers/Board';
 import LoginScreen from '../modules/index';
 import './App.css';
