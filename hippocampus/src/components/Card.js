@@ -1,7 +1,12 @@
 import React from 'react';
 
 const Card = (props) => {
-  return <button className="card">{props.value}</button>;
+
+  const createEmpty = (empty) => {
+   return empty ? 'card empty' : 'card';
+  }
+
+  return <button className={createEmpty(props.empty)} >{props.value}</button>;
 };
 
 export default Card;

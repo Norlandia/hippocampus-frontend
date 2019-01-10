@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Card from '../components/Card';
+import '../game.css';
 
 class Board extends Component {
   state = {
@@ -20,10 +21,15 @@ class Board extends Component {
       }
       board.push(row);
     }
-    this.setState({
-      board: board,
-    });
+
+      this.setState({
+        board: board,
+      });
   };
+
+  isLast = (indexValue) => {
+    return indexValue === 8;
+  }
 
   render() {
     return (
@@ -31,7 +37,7 @@ class Board extends Component {
         {this.state.board.map((row, i) => (
           <div key={i}>
             {row.map((card, j) => (
-              <Card key={card.value} value={card.value} />
+              <Card key={card.value} value={card.value} empty={this.isLast(i*3+j)}/>
             ))}
           </div>
         ))}
