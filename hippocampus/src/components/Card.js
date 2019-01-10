@@ -1,11 +1,7 @@
 import React from 'react';
 
-const Card = () => {
-  return (
-    <div>
-      <button className="card"></button>
-    </div>
-  );
-}
- 
+const Card = (props) => {
+  return <button className="card">{props.value}</button>;
+};
+
 export default Card;
