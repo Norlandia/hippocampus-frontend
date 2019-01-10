@@ -16,7 +16,7 @@ class Board extends Component {
     for (let i = 0; i < 3; i++) {
       let row = [];
       for (let j = 0; j < 3; j++) {
-        row.push({ value: j });
+        row.push({ value: i * 3 + j });
       }
       board.push(row);
     }
