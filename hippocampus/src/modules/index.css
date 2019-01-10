@@ -1,4 +1,25 @@
-.paper {
-  background: black;
-  background-image: url('./loginScreen/images/hippocampus.svg')
-} 
+.header {
+  text-align: center;
+  font-family: 'ZCOOL KuaiLe', cursive;
+  font-size: -webkit-xxx-large;
+  text-transform: uppercase;
+  color: #B09765;
+}
+
+.footer {
+  text-decoration: none;
+  color: #B09765;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 2%;
+  text-align: center;
+  width: 100%;
+  padding-top: 0.15%;
+  padding-bottom: 0.15%;
+  transition: all .2s ease-in-out;
+}
+
+.footer:hover {
+  color: white;
+  transform: scale(1.1);
+}

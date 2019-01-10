@@ -1,0 +1,9 @@
+.paper2 {
+  background-image: url('../../../images/hippocampus.png');
+  background-size: cover;
+  width: 400px;
+  height: 500px;
+  position: absolute;
+  top: 25%;
+  left: 10%;
+}

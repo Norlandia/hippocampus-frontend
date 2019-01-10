@@ -1,0 +1,74 @@
+.paper {
+  color: white;
+  background-color: #B09765;
+  box-shadow: -15px 30px #897245;
+  border-radius: 13px;
+  width: 300px;
+  height: 400px;
+  padding: 2%;
+  text-align: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  position: absolute;
+  right: 15%;
+  top: 25%;
+  font-family: 'Orbitron', sans-serif;
+}
+
+input {
+  margin-bottom: 15%;
+  height: 25px;
+}
+
+.paperInputContainer {
+    margin: 5%;
+    display: inline-grid;
+    padding: 5%;
+}
+
+label {
+  color: white;
+  text-align: left;
+}
+
+.bottomLink {
+  text-decoration: none;
+  color: white;
+  transition: all .2s ease-in-out;
+  list-style-type: none;
+  /* padding: 5% */
+  /* margin-right: 3% */
+  width: fit-content;
+}
+
+
+.bottomLink:hover {
+  transform: scale(1.1);  
+  cursor: pointer;
+}
+
+.loginButton {
+  height: 30px;
+  width: 70px;
+  border: none;
+  border-radius: 10px;
+  margin-left: 83%;
+  background: #897245;  
+  color: white;
+  white-space: nowrap;
+  font-family: 'Orbitron', sans-serif;
+  padding-top: 2%;
+  text-align: center;
+}
+
+.loginButton:hover {
+  background: #573C23;
+  cursor: pointer;  
+}
+
+.signUpLink {
+  margin-bottom: 13%;
+  bottom: 0;
+  position: absolute;
+}
