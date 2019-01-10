@@ -5,11 +5,10 @@ import '../game.css';
 class Board extends Component {
   state = {
     board: [],
-    //position: {},
+    // position: {},
   };
 
   componentDidMount() {
-    console.log('Working');
     this.createBoard();
   }
 
@@ -34,12 +33,12 @@ class Board extends Component {
     });
   };
 
-  isLast = (indexValue) => {
-    return indexValue === 8;
-  };
-
   handleClick = (clickedPosition, cardValue) => {
+    console.log(clickedPosition);
+
     const neighbors = this.getAdjacents(clickedPosition);
+
+    console.log('neighbor', neighbors);
 
     const empty = this.getEmptyNeighbor(neighbors);
 
@@ -55,7 +54,16 @@ class Board extends Component {
   };
 
   swap = (cardOne, cardTwo) => {
-    
+    const boardCopy = [...this.state.board];
+
+    const tempPos = {...cardOne.position};
+    cardOne.position = cardTwo.position;
+    cardTwo.position = tempPos;
+
+    boardCopy[cardOne.position.x][cardOne.position.y] = cardOne;
+    boardCopy[cardTwo.position.x][cardTwo.position.y] = cardTwo;
+
+    return boardCopy;
   };
 
   getEmptyNeighbor = (neighbors) => {
@@ -74,16 +82,35 @@ class Board extends Component {
       for (let j = 0; j < this.state.board[i].length; j++) {
         const currPos = this.state.board[i][j].position;
         if (
-          currPos === { x: clickedPosition.x - 1, y: clickedPosition.y } ||
-          currPos === { x: clickedPosition.x, y: clickedPosition.y + 1 } ||
-          currPos === { x: clickedPosition.x + 1, y: clickedPosition.y } ||
-          currPos === { x: clickedPosition.x, y: clickedPosition.y - 1 }
+          this.arePositionsEqual(currPos, {
+            x: clickedPosition.x,
+            y: clickedPosition.y + 1,
+          }) ||
+          this.arePositionsEqual(currPos, {
+            x: clickedPosition.x - 1,
+            y: clickedPosition.y,
+          }) ||
+          this.arePositionsEqual(currPos, {
+            x: clickedPosition.x + 1,
+            y: clickedPosition.y,
+          }) ||
+          this.arePositionsEqual(currPos, {
+            x: clickedPosition.x,
+            y: clickedPosition.y - 1,
+          })
         ) {
           adjacentCards.push(this.state.board[i][j]);
         }
       }
     }
     return adjacentCards;
+  };
+
+  arePositionsEqual = (pos1, pos2) => {
+    return Object.keys(pos1).reduce(
+      (prev, xy) => prev && pos1[xy] === pos2[xy],
+      true
+    );
   };
 
   render() {
@@ -97,7 +124,7 @@ class Board extends Component {
                 value={card.value}
                 position={card.position}
                 onClick={this.handleClick}
-                empty={this.isLast(i * 3 + j)}
+                empty={this.state.board[i][j].value === 8}
               />
             ))}
           </div>
