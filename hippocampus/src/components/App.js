@@ -1,13 +1,17 @@
+import React from 'react';
 import React, { Component } from 'react';
-import './App.css';
+import Board from '../containers/Board';
 import LoginScreen from '../modules/index';
+import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-        <LoginScreen/>
-    );
-  }
-}
+const App = () => {
+  return (
+    <div>
+     <LoginScreen/>
+     <Board />
+    </div>
+  );
+};
+
 
 export default App;
