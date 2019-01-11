@@ -34,11 +34,7 @@ class Board extends Component {
   };
 
   handleClick = (clickedPosition, cardValue) => {
-    console.log(clickedPosition);
-
     const neighbors = this.getAdjacents(clickedPosition);
-
-    console.log('neighbor', neighbors);
 
     const empty = this.getEmptyNeighbor(neighbors);
 
@@ -113,7 +109,35 @@ class Board extends Component {
     );
   };
 
+  createValueArray = () => {
+    let valueArray = [];
+    for (let i = 0; i < this.state.height * this.state.height; i++) {
+      valueArray.push(i);
+    }
+    return valueArray;
+  }
+
+  shuffle = () => {
+    const shuffled = this.createValueArray();
+    for (let i = shuffled.length -1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
+  // setNewValues = () => {
+  //   const shuffledArray
+  //   for (let i = 0; i < this.state.board.length; i++) {
+  //     for (let j = 0; i < this.state.board.length; j++) {
+      
+  //     }
+  //   }
+  // }
+
   render() {
+    console.log(this.shuffle());
+    
     return (
       <div className="game">
         {this.state.board.map((row, i) => (
