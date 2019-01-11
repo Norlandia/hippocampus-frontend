@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
 import Card from '../components/Card';
+import Win from '../components/Win';
 import './game.css';
 
 class Board extends Component {
   state = {
     board: [],
-    // position: {},
+    height: 2,
+    isWin: false,
   };
 
   componentDidMount() {
     this.createBoard();
+    this.setNewValues();
   }
 
   createBoard = () => {
     const board = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < this.state.height; i++) {
       let row = [];
-      for (let j = 0; j < 3; j++) {
+      for (let j = 0; j < this.state.height; j++) {
         row.push({
-          value: i * 3 + j,
+          value: i * this.state.height + j,
           position: {
             x: i,
             y: j,
@@ -34,11 +37,7 @@ class Board extends Component {
   };
 
   handleClick = (clickedPosition, cardValue) => {
-    console.log(clickedPosition);
-
     const neighbors = this.getAdjacents(clickedPosition);
-
-    console.log('neighbor', neighbors);
 
     const empty = this.getEmptyNeighbor(neighbors);
 
@@ -47,8 +46,12 @@ class Board extends Component {
         clickedPosition.y
       ];
       const swappedBoard = this.swap(empty, clickedCard);
+      const isWin = this.isWin(swappedBoard);
+      console.log(isWin);
+      
       this.setState({
         board: swappedBoard,
+        isWin: isWin,
       });
     }
   };
@@ -56,7 +59,7 @@ class Board extends Component {
   swap = (cardOne, cardTwo) => {
     const boardCopy = [...this.state.board];
 
-    const tempPos = {...cardOne.position};
+    const tempPos = { ...cardOne.position };
     cardOne.position = cardTwo.position;
     cardTwo.position = tempPos;
 
@@ -68,7 +71,7 @@ class Board extends Component {
 
   getEmptyNeighbor = (neighbors) => {
     for (let i = 0; i < neighbors.length; i++) {
-      if (neighbors[i].value === 8) {
+      if (neighbors[i].value === this.state.height * this.state.height - 1) {
         return neighbors[i];
       }
     }
@@ -113,22 +116,100 @@ class Board extends Component {
     );
   };
 
+  createValueArray = () => {
+    let valueArray = [];
+    for (let i = 0; i < this.state.height * this.state.height; i++) {
+      valueArray.push(i);
+    }
+    return valueArray;
+  };
+
+  shuffle = () => {
+    const shuffled = this.createValueArray();
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  convertToMatrix = () => {
+    const shuffledArray = this.shuffle();
+
+    const shuffledMatrix = [];
+
+    while (shuffledArray.length) {
+      shuffledMatrix.push(shuffledArray.splice(0, this.state.height));
+    }
+
+    return shuffledMatrix;
+  };
+
+  setNewValues = () => {
+    const shuffledMatrix = this.convertToMatrix();
+
+    const shuffledBoard = [];
+    for (let i = 0; i < shuffledMatrix.length; i++) {
+      const row = [];
+      for (let j = 0; j < shuffledMatrix[i].length; j++) {
+        row.push({
+          value: shuffledMatrix[i][j],
+          position: {
+            x: i,
+            y: j,
+          },
+        });
+      }
+      shuffledBoard.push(row);
+    }
+
+    this.setState({
+      board: shuffledBoard,
+    });
+  };
+
+  convertToSimpleArr = (swappedBoard) => {
+    const simpleArray = [].concat(...swappedBoard);
+    console.log(simpleArray);
+
+    return simpleArray;
+  };
+
+  isWin = (swappedBoard) => {
+    const simpleArray = this.convertToSimpleArr(swappedBoard);
+
+    console.log('simpleArray', simpleArray);
+
+    for (let i = 0; i < simpleArray.length - 1; i++) {
+      if (simpleArray[i].value !== simpleArray[i + 1].value - 1) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   render() {
     return (
-      <div className="game">
-        {this.state.board.map((row, i) => (
-          <div key={i}>
-            {row.map((card, j) => (
-              <Card
+      <div className="board-container">
+      <Win isWin={this.state.isWin} />
+        <div className="game">
+          {this.state.board.map((row, i) => (
+            <div key={i}>
+              {row.map((card, j) => (
+                <Card
                 key={card.value}
                 value={card.value}
                 position={card.position}
                 onClick={this.handleClick}
-                empty={this.state.board[i][j].value === 8}
-              />
-            ))}
-          </div>
-        ))}
+                empty={
+                  this.state.board[i][j].value ===
+                  this.state.height * this.state.height - 1
+                }
+                />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
