@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Card from '../components/Card';
+import Win from '../components/Win';
 import './game.css';
 
 class Board extends Component {
   state = {
     board: [],
     height: 2,
+    isWin: false,
   };
 
   componentDidMount() {
@@ -44,11 +46,14 @@ class Board extends Component {
         clickedPosition.y
       ];
       const swappedBoard = this.swap(empty, clickedCard);
+      const isWin = this.isWin(swappedBoard);
+      console.log(isWin);
+      
       this.setState({
         board: swappedBoard,
+        isWin: isWin,
       });
     }
-    this.isWin();
   };
 
   swap = (cardOne, cardTwo) => {
@@ -163,30 +168,35 @@ class Board extends Component {
     });
   };
 
-  convertToSimpleArr = () => {
-    const simpleArray = [].concat(...this.state.board);
+  convertToSimpleArr = (swappedBoard) => {
+    const simpleArray = [].concat(...swappedBoard);
     console.log(simpleArray);
 
     return simpleArray;
   };
 
-  isWin = () => {
-    const simpleArray = this.convertToSimpleArr();
+  isWin = (swappedBoard) => {
+    const simpleArray = this.convertToSimpleArr(swappedBoard);
 
     console.log('simpleArray', simpleArray);
-    
+
     for (let i = 0; i < simpleArray.length - 1; i++) {
-      return simpleArray[i].value === simpleArray[i + 1].value - 1;
+      if (simpleArray[i].value !== simpleArray[i + 1].value - 1) {
+        return false;
+      }
     }
+    return true;
   };
 
   render() {
     return (
-      <div className="game">
-        {this.state.board.map((row, i) => (
-          <div key={i}>
-            {row.map((card, j) => (
-              <Card
+      <div className="board-container">
+      <Win isWin={this.state.isWin} />
+        <div className="game">
+          {this.state.board.map((row, i) => (
+            <div key={i}>
+              {row.map((card, j) => (
+                <Card
                 key={card.value}
                 value={card.value}
                 position={card.position}
@@ -195,10 +205,11 @@ class Board extends Component {
                   this.state.board[i][j].value ===
                   this.state.height * this.state.height - 1
                 }
-              />
-            ))}
-          </div>
-        ))}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
