@@ -5,7 +5,7 @@ import './game.css';
 class Board extends Component {
   state = {
     board: [],
-    // position: {},
+    height: 4,
   };
 
   componentDidMount() {
@@ -14,11 +14,11 @@ class Board extends Component {
 
   createBoard = () => {
     const board = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < this.state.height; i++) {
       let row = [];
-      for (let j = 0; j < 3; j++) {
+      for (let j = 0; j < this.state.height; j++) {
         row.push({
-          value: i * 3 + j,
+          value: i * this.state.height + j,
           position: {
             x: i,
             y: j,
@@ -68,7 +68,7 @@ class Board extends Component {
 
   getEmptyNeighbor = (neighbors) => {
     for (let i = 0; i < neighbors.length; i++) {
-      if (neighbors[i].value === 8) {
+      if (neighbors[i].value === this.state.height * this.state.height - 1 ) {
         return neighbors[i];
       }
     }
@@ -124,7 +124,7 @@ class Board extends Component {
                 value={card.value}
                 position={card.position}
                 onClick={this.handleClick}
-                empty={this.state.board[i][j].value === 8}
+                empty={this.state.board[i][j].value === this.state.height * this.state.height - 1}
               />
             ))}
           </div>
