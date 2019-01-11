@@ -6,7 +6,7 @@ import './game.css';
 class Board extends Component {
   state = {
     board: [],
-    height: 2,
+    height: 4,
     isWin: false,
   };
 
@@ -182,17 +182,23 @@ class Board extends Component {
 
     for (let i = 0; i < simpleArray.length - 1; i++) {
       if (simpleArray[i].value !== simpleArray[i + 1].value - 1) {
+        this.changeBoardClassName();
         return false;
       }
     }
+    this.changeBoardClassName();
     return true;
   };
+
+  changeBoardClassName = (state) => {
+    return state ? 'game board-transparent' : 'game board-visible';
+  }
 
   render() {
     return (
       <div className="board-container">
       <Win isWin={this.state.isWin} />
-        <div className="game">
+        <div className={this.changeBoardClassName(this.state.isWin)}>
           {this.state.board.map((row, i) => (
             <div key={i}>
               {row.map((card, j) => (

@@ -32,12 +32,14 @@
 .board-container {
   display: flex;
   justify-content: center;
+  align-content: center;
 }
 
 .win {
   color: orange;
-  font-size: 60px;
-  font-family: 'Orbitron', sans-serif;
+  font-size: 100px;
+  font-family: 'ZCOOL KuaiLe', cursive;
+  justify-self: center;
 }
 
 .visible {
@@ -46,4 +48,12 @@
 
 .transparent {
   opacity: 0;
+}
+
+.board-transparent {
+  opacity: 0;
+}
+
+.board-visible {
+  opacity: 100%;
 }
