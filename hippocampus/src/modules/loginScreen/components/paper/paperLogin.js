@@ -20,7 +20,6 @@ import './paper.css';
 // console.log(this.state)
   
 const Paper = () => (
-  
 
   <div>
       <h1 className="header"> Hippocampus</h1>
@@ -28,11 +27,11 @@ const Paper = () => (
   <div className="paper">
     <h1>Login</h1>
     <div className="paperInputContainer">
-      <label for="email">E-mail</label>
+      <label htmlFor="email">E-mail</label>
         <input id="email" type="email"/>
-      <label for="password">Password</label>
+      <label htmlFor="password">Password</label>
         <input id="password"  type="password"/>
-      <button className="loginButton" onClick={ login }>Enter</button>  
+      <button className="loginButton" onClick={ login } >Enter</button>  
     </div>
     <li className="bottomLink"><NavLink className="bottomLink" to="/signup">Doesn't have an account yet?</NavLink></li>
   </div>

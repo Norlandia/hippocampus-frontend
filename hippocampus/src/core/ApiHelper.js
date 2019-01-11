@@ -1,4 +1,4 @@
-const baseURL = 'http://10.27.99.158:8080';
+const baseURL = 'http://10.27.99.191:8080';
 
 
 
@@ -23,7 +23,7 @@ const reg = () => {
         referrer: "no-referrer", 
         body: formData,
     })
-    .then(dwa => console.log(dwa))
+    .then(window.location.href="http://localhost:3000/")
     .then(console.log(firstName, lastName, email, pw, pw2))
 }
 
@@ -44,10 +44,7 @@ const login = () => {
         referrer: "no-referrer", 
         body: formData,
     })
-    .then(dwa => console.log(dwa))
-    .then(console.log(email, pw))
-    
-    .then(console.log('napasztmek'))
+    .then(window.location.href="http://localhost:3000/game")
 }
 
 export {

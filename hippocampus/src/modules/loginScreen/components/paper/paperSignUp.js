@@ -21,7 +21,7 @@ const Paper2 = () => (
         <input id="password" type="password"/>
       <label for="password2">Password Again</label>
         <input id="password2" type="password"/>
-      <button className="loginButton" onClick={reg}>Sign Up</button>  
+      <button className="loginButton" onClick={reg} to="http://localhost:3000/login">Sign Up</button>  
     </div>
     <div className="signUpLink">
       <li className="bottomLink"><NavLink className="bottomLink" to="/">Already have an account?</NavLink></li>    
