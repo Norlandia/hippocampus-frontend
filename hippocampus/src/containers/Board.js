@@ -5,7 +5,7 @@ import './game.css';
 class Board extends Component {
   state = {
     board: [],
-    height: 3,
+    height: 2,
   };
 
   componentDidMount() {
@@ -48,6 +48,7 @@ class Board extends Component {
         board: swappedBoard,
       });
     }
+    this.isWin();
   };
 
   swap = (cardOne, cardTwo) => {
@@ -142,7 +143,7 @@ class Board extends Component {
   setNewValues = () => {
     const shuffledMatrix = this.convertToMatrix();
     console.log('shuffledMMM', shuffledMatrix);
-    
+
     const shuffledBoard = [];
     for (let i = 0; i < shuffledMatrix.length; i++) {
       const row = [];
@@ -153,19 +154,37 @@ class Board extends Component {
             x: i,
             y: j,
           },
-          
         });
       }
       shuffledBoard.push(row);
     }
-    
+
     this.setState({
       board: shuffledBoard,
     });
   };
 
-  render() {
+  isWin = () => {
+    for (let i = 0; i < this.state.board.length - 1; i++) {
+      for (let j = 0; j < this.state.board[i].length - 1; j++) {
+        const checkNeighborVal = this.state.board[i][j].value;
 
+        if (
+          checkNeighborVal + 1 && checkNeighborVal + 1 === this.state.board[i][j + 1].value &&
+          checkNeighborVal + this.state.board.length ===
+            this.state.board[i + 1][j]
+        ) {
+          console.log('WIN')
+          return true;
+        }
+      }
+    }
+    console.log('WTF');
+    
+    return false;
+  };
+
+  render() {
     return (
       <div className="game">
         {this.state.board.map((row, i) => (
