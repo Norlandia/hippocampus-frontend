@@ -142,7 +142,6 @@ class Board extends Component {
 
   setNewValues = () => {
     const shuffledMatrix = this.convertToMatrix();
-    console.log('shuffledMMM', shuffledMatrix);
 
     const shuffledBoard = [];
     for (let i = 0; i < shuffledMatrix.length; i++) {
@@ -164,24 +163,21 @@ class Board extends Component {
     });
   };
 
-  isWin = () => {
-    for (let i = 0; i < this.state.board.length - 1; i++) {
-      for (let j = 0; j < this.state.board[i].length - 1; j++) {
-        const checkNeighborVal = this.state.board[i][j].value;
+  convertToSimpleArr = () => {
+    const simpleArray = [].concat(...this.state.board);
+    console.log(simpleArray);
 
-        if (
-          checkNeighborVal + 1 && checkNeighborVal + 1 === this.state.board[i][j + 1].value &&
-          checkNeighborVal + this.state.board.length ===
-            this.state.board[i + 1][j]
-        ) {
-          console.log('WIN')
-          return true;
-        }
-      }
-    }
-    console.log('WTF');
+    return simpleArray;
+  };
+
+  isWin = () => {
+    const simpleArray = this.convertToSimpleArr();
+
+    console.log('simpleArray', simpleArray);
     
-    return false;
+    for (let i = 0; i < simpleArray.length - 1; i++) {
+      return simpleArray[i].value === simpleArray[i + 1].value - 1;
+    }
   };
 
   render() {
