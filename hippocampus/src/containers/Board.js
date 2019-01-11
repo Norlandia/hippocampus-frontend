@@ -5,11 +5,12 @@ import './game.css';
 class Board extends Component {
   state = {
     board: [],
-    height: 4,
+    height: 3,
   };
 
   componentDidMount() {
     this.createBoard();
+    this.setNewValues();
   }
 
   createBoard = () => {
@@ -52,7 +53,7 @@ class Board extends Component {
   swap = (cardOne, cardTwo) => {
     const boardCopy = [...this.state.board];
 
-    const tempPos = {...cardOne.position};
+    const tempPos = { ...cardOne.position };
     cardOne.position = cardTwo.position;
     cardTwo.position = tempPos;
 
@@ -64,7 +65,7 @@ class Board extends Component {
 
   getEmptyNeighbor = (neighbors) => {
     for (let i = 0; i < neighbors.length; i++) {
-      if (neighbors[i].value === this.state.height * this.state.height - 1 ) {
+      if (neighbors[i].value === this.state.height * this.state.height - 1) {
         return neighbors[i];
       }
     }
@@ -115,29 +116,56 @@ class Board extends Component {
       valueArray.push(i);
     }
     return valueArray;
-  }
+  };
 
   shuffle = () => {
     const shuffled = this.createValueArray();
-    for (let i = shuffled.length -1; i > 0; i--) {
+    for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
     return shuffled;
-  }
+  };
 
-  // setNewValues = () => {
-  //   const shuffledArray
-  //   for (let i = 0; i < this.state.board.length; i++) {
-  //     for (let j = 0; i < this.state.board.length; j++) {
-      
-  //     }
-  //   }
-  // }
+  convertToMatrix = () => {
+    const shuffledArray = this.shuffle();
+
+    const shuffledMatrix = [];
+
+    while (shuffledArray.length) {
+      shuffledMatrix.push(shuffledArray.splice(0, this.state.height));
+    }
+
+    return shuffledMatrix;
+  };
+
+  setNewValues = () => {
+    const shuffledMatrix = this.convertToMatrix();
+    console.log('shuffledMMM', shuffledMatrix);
+    
+    const shuffledBoard = [];
+    for (let i = 0; i < shuffledMatrix.length; i++) {
+      const row = [];
+      for (let j = 0; j < shuffledMatrix[i].length; j++) {
+        row.push({
+          value: shuffledMatrix[i][j],
+          position: {
+            x: i,
+            y: j,
+          },
+          
+        });
+      }
+      shuffledBoard.push(row);
+    }
+    
+    this.setState({
+      board: shuffledBoard,
+    });
+  };
 
   render() {
-    console.log(this.shuffle());
-    
+
     return (
       <div className="game">
         {this.state.board.map((row, i) => (
@@ -148,7 +176,10 @@ class Board extends Component {
                 value={card.value}
                 position={card.position}
                 onClick={this.handleClick}
-                empty={this.state.board[i][j].value === this.state.height * this.state.height - 1}
+                empty={
+                  this.state.board[i][j].value ===
+                  this.state.height * this.state.height - 1
+                }
               />
             ))}
           </div>
