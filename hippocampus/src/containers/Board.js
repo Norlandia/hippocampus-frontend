@@ -6,7 +6,7 @@ import './game.css';
 class Board extends Component {
   state = {
     board: [],
-    height: 4,
+    height: 3,
     isWin: false,
   };
 
