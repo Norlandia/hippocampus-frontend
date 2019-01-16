@@ -27,7 +27,7 @@ const Paper = () => (
     </div>
     <a className="footer" href="/">
       Designed and created by | Kriszta Nemeth | Nora Puskas | Peter Antal |
-      David Czeller | Special thanks to KOND
+      David Czeller
     </a>
   </div>
 );
